@@ -4,38 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProgrammingExcercise {
-	public static String input = "ACGTCA";
+	public static String input = "ATCGTC";
 	public static List<String> data = new ArrayList<String>();
-	public static List<Character> characters = new ArrayList<Character>();
-	public static int match = Integer.MIN_VALUE;
-	public static int randChar = Integer.MIN_VALUE;
 
 	public static void main(String[] args) {
-		while (true) {
-			StringBuilder output = new StringBuilder(input.length());
-			intializer();
-
-			while (!characters.isEmpty()) {
-				randChar = (int) (Math.random() * characters.size());
-				output.append(characters.remove(randChar));
-			}
-			if (data.contains(output.toString()) == false) {
-				if (data.isEmpty()) {
-					data.add(output.toString());
-				} else {
-					match = matching(data.get(data.size() - 1), output.toString());
-					if ((input.length() - match) >= 3) {
-						if (data.size() == 96) {
-							break;
-						} else {
-							data.add(output.toString());
-						}
-					}
-				}
-
-			}
-		}
-		
+		permuteCharacets(input, 0, input.length() - 1);
 		printListAndSize();
 	}
 
@@ -44,21 +17,30 @@ public class ProgrammingExcercise {
 		System.out.println("Words: " + data.size());
 	}
 
-	static void intializer() {
-		for (char c : input.toCharArray()) {
-			characters.add(c);
+	private static void permuteCharacets(String input, int l, int r) {
+		if (l == r) {
+			if (data.contains(input) == false) {
+				if (data.size() == 96) {
+					return;
+				}
+				data.add(input);
+			}
+		} else {
+			for (int i = l; i <= r; i++) {
+				input = swap(input, l, i);
+				permuteCharacets(input, l + 1, r);
+				input = swap(input, l, i);
+			}
 		}
 	}
 
-	static int matching(String str, String str2) {
-		int matches = 0;
-
-		for (int i = 0; i < str.length(); i++) {
-			if (str.charAt(i) == str2.charAt(i)) {
-				matches++;
-			}
-		}
-		return matches;
+	public static String swap(String a, int i, int j) {
+		char temp;
+		char[] charArray = a.toCharArray();
+		temp = charArray[i];
+		charArray[i] = charArray[j];
+		charArray[j] = temp;
+		return String.valueOf(charArray);
 	}
 
 	@Override
