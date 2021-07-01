@@ -19,11 +19,13 @@ public class ProgrammingExcercise {
 
 	private static void permuteCharacets(String input, int l, int r) {
 		if (l == r) {
-			if (data.contains(input) == false) {
+			if (data.contains(input) == false && calculateDistance(input) == true ) {
 				if (data.size() == 96) {
 					return;
+				}else {
+					data.add(input);
 				}
-				data.add(input);
+				
 			}
 		} else {
 			for (int i = l; i <= r; i++) {
@@ -34,6 +36,17 @@ public class ProgrammingExcercise {
 		}
 	}
 
+	public static boolean calculateDistance(String str) {
+		String sequenceOne = str.substring(0, 4);
+		String sequenceTwo = str.substring(1, 5);
+		String sequenceThree = str.substring(2, 6);
+		
+		if(data.contains(sequenceOne) == true || data.contains(sequenceTwo) == true || data.contains(sequenceThree) == true ) {
+			return false;
+		}
+		return true;
+	}
+	
 	public static String swap(String a, int i, int j) {
 		char temp;
 		char[] charArray = a.toCharArray();
