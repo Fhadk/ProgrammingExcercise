@@ -19,13 +19,14 @@ public class ProgrammingExcercise {
 
 	private static void permuteCharacets(String input, int l, int r) {
 		if (l == r) {
-			if (data.contains(input) == false && calculateDistance(input) == true ) {
+			if(data.isEmpty()) {
+				data.add(input);
+			}else if (data.contains(input) == false  && calculateDistance(input) == true) { 
 				if (data.size() == 96) {
 					return;
 				}else {
 					data.add(input);
-				}
-				
+				}				
 			}
 		} else {
 			for (int i = l; i <= r; i++) {
@@ -41,8 +42,10 @@ public class ProgrammingExcercise {
 		String sequenceTwo = str.substring(1, 5);
 		String sequenceThree = str.substring(2, 6);
 		
-		if(data.contains(sequenceOne) == true || data.contains(sequenceTwo) == true || data.contains(sequenceThree) == true ) {
-			return false;
+		for(String s:data) {
+			if(s.contains(sequenceOne) == true || s.contains(sequenceTwo) == true || s.contains(sequenceThree) == true ) {
+				return false;
+			}
 		}
 		return true;
 	}
