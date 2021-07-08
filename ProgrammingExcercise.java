@@ -4,11 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProgrammingExcercise {
-	public static String input = "ATCGTC";
+	public static String input = "ATCG";
 	public static List<String> data = new ArrayList<String>();
+	public static List<String> subString = new ArrayList<String>();
 
 	public static void main(String[] args) {
-		permuteCharacets(input, 0, input.length() - 1);
+		findingSubString(input);
+		
+		for(String s: subString) {
+			permuteCharacets(s, 0, s.length() - 1);
+		}
 		printListAndSize();
 	}
 
@@ -57,6 +62,23 @@ public class ProgrammingExcercise {
 		charArray[i] = charArray[j];
 		charArray[j] = temp;
 		return String.valueOf(charArray);
+	}
+	
+	public static void findingSubString(String str) {
+		int len = str.length();  
+	    int temp = 0;
+	    String[] arr = str.split("");
+	    
+	        for(int i = 0; i < len; i++) {  
+	            for(int j = i+1; j < len; j++) {
+                	subString.add(input+arr[i]+arr[j]);
+	                temp++;  
+	            }  
+	        }
+	        
+	        for(int i = 0; i < len; i++) {
+	        	subString.add(input+arr[i]+arr[i]);
+	        }
 	}
 
 	@Override
