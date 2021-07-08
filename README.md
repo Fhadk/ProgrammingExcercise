@@ -2,7 +2,7 @@
 
 The exercise is to implement an algorithm thatcangenerate a list of 96 words. Every word should be created using six (6) characters in total, all of which are to be picked from a four-letter alphabet consisting of A, C, G and T. Each word in the list must differ from every other word in the list in at least three positions
 
-#Assumption
+# Assumption
 
 # Output
 
